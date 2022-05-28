@@ -43,13 +43,7 @@ class ShuntingYard():
                 self.output.append(token)
             elif token in ('+', '-', '/', '*', '^'):
                 #print('operaattori')
-                while not self.operator_stack.is_empty():
-                    if self.operator_stack.peek() != '(':
-                        self.output.append(self.operator_stack.pop())
-                    else:
-                        break
-
-                self.operator_stack.push(token)
+                self.handle_operator_token(token)
 
             elif token == '(':
                 #print('vasen sulku')
@@ -72,13 +66,55 @@ class ShuntingYard():
 
             print(f"Output: {self.output}, stack {self.operator_stack.get_stack()}")
 
+    def handle_operator_token(self, token):
+        """Käsittelee lausekkeesta tulevat operaattorit.
+
+        Args:
+            token: Käsiteltävä operaattori
+        """
+        while not self.operator_stack.is_empty():
+            if self.operator_stack.peek() != '(' and self.get_precedence(self.operator_stack.peek()) >= self.get_precedence(token):
+                self.output.append(self.operator_stack.pop())
+            else:
+                break
+
+        self.operator_stack.push(token)
+    
+
     def read_operators(self):
         """Lukee operaattorit operaattoripinosta output-jonoon.
         """
-        for token in self.operator_stack.get_stack():
+#        for token in self.operator_stack.get_stack():
+#            operator = self.operator_stack.pop()
+#            if operator == '(':
+#                print('väärä määrä sulkuja')
+#                return False
+#            else:
+#                self.output.append(operator)
+
+        while not self.operator_stack.is_empty():
             operator = self.operator_stack.pop()
             if operator == '(':
                 print('väärä määrä sulkuja')
                 return False
             else:
-                self.output.append(token)
+                self.output.append(operator)
+
+    def get_precedence(self, operator):
+        """_summary_
+
+        Args:
+            operator: Operaattori, jonka laskujärjestys tarkistetaan.
+
+        Returns:
+            Laskujärjestystä kuvaavan luvun. False, jos operaattoria ei ole olemassa.
+        """
+        if operator == '+' or operator == '-':
+            return 1
+        elif operator == '*' or operator == '/':
+            return 2
+        elif operator == '^':
+            return 3
+        else:
+            return False
+        

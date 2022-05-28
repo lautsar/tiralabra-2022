@@ -9,4 +9,5 @@ Pvm | Aika | Mitä tehty
 15.5. | 3 | Shunting yard -algoritmiin tutustumista ja hyvin alkeellinen ensimmäinen versio
 20.5. | 3 | Stack-luokan toteutus, vähän testejä
 21.5. | 4 | Koodin refaktorointia, lisää testejä. Dokumentaation kirjoittamista
-Yht. | 19 |
+28.5. | 3 | Operaattoreiden laskujärjestyksen huomiointi
+Yht. | 22 |
