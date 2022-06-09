@@ -9,6 +9,10 @@ class ShuntingYard():
         """
         self.output = []
         self.operator_stack = Stack()
+        self.operators = ['+', '-', '/', '*', '^']
+        self.functions = ['min', 'max', 'sin', 'cos', 'tan']
+        self.variables = ['x']
+        self.constants = ['pi']
 
     def shunting_yard(self, expression):
         """Muutaa infix-notaatiossa olevan lausekkeen postfix-muotoon.
@@ -41,10 +45,13 @@ class ShuntingYard():
             if re.findall("^[0-9]+$", token):
                 #print("numero")
                 self.output.append(token)
-            elif token in ('+', '-', '/', '*', '^'):
+            elif token in self.constants:
+                self.output.append(token)
+            elif token in self.operators:
                 #print('operaattori')
                 self.handle_operator_token(token)
-
+            elif token in self.functions:
+                self.operator_stack.push(token)
             elif token == '(':
                 #print('vasen sulku')
                 self.operator_stack.push(token)
@@ -59,6 +66,12 @@ class ShuntingYard():
 
                 if self.operator_stack.is_empty() is False and self.operator_stack.peek() == '(':
                     self.operator_stack.pop()
+                
+                if self.operator_stack.peek() in self.functions:
+                    self.output.append(self.operator_stack.pop())
+
+            elif token == ',':
+                continue
 
             else:
                 print('virhe')
@@ -73,7 +86,13 @@ class ShuntingYard():
             token: Käsiteltävä operaattori
         """
         while not self.operator_stack.is_empty():
-            if self.operator_stack.peek() != '(' and self.get_precedence(self.operator_stack.peek()) >= self.get_precedence(token):
+            if self.operator_stack.peek() not in self.functions and self.operator_stack.peek() != '(' and (
+                (self.get_precedence(self.operator_stack.peek())[0] > self.get_precedence(token)[0])
+                or 
+                ((self.get_precedence(self.operator_stack.peek())[0] == self.get_precedence(token)[0]) and 
+                (self.get_precedence(self.operator_stack.peek())[1] == "left"))
+            ):
+        
                 self.output.append(self.operator_stack.pop())
             else:
                 break
@@ -110,11 +129,11 @@ class ShuntingYard():
             Laskujärjestystä kuvaavan luvun. False, jos operaattoria ei ole olemassa.
         """
         if operator == '+' or operator == '-':
-            return 1
+            return (2, "left")
         elif operator == '*' or operator == '/':
-            return 2
+            return (3, "left")
         elif operator == '^':
-            return 3
+            return (4, "right")
         else:
             return False
         
