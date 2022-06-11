@@ -1,9 +1,10 @@
 import unittest
 from algorithms.evaluator import Evaluator
+from library.library import Library
 
 class TestEvaluator(unittest.TestCase):
     def setUp(self):
-        self.evaluator = Evaluator()
+        self.evaluator = Evaluator(Library())
 
     def test_simple_sum(self):
         output = ['2', '3', '+']
