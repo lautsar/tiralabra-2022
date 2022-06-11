@@ -6,10 +6,14 @@ Tämä projekti on Helsingin yliopiston kurssin *TKT20010 Aineopintojen harjoitu
 * [Viikko 1](/dokumentaatio/viikkoraportti_1.md)
 * [Viikko 2](/dokumentaatio/viikkoraportti_2.md)
 * [Viikko 3](/dokumentaatio/viikkoraportti_3.md)
+* Viikko 4, ei palautettu
+* [Viikko 5](/dokumentaatio/viikkoraportti_5.md)
 
 ## Dokumentaatio
 * [Määrittelydokumentti](/dokumentaatio/maarittelydokumentti.md)
 * [Testausdokumentti](/dokumentaatio/testausdokumentti.md)
+* [Käyttöohje](/dokumentaatio/kayttoohje.md)
+* [Toteutusdokumentti](/dokumentaatio/toteutusdokumentti.md)
 
 ## Komentorivikomennot
 
