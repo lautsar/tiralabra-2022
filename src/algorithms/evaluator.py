@@ -1,12 +1,13 @@
 import re
-from structures.stack import Stack
 import math
+from structures.stack import Stack
 
 class Evaluator():
     """Luokka vastaa Shunting yard -algoritmin tuottaman lausekkeen arvon laskemisesta.
     """
     def __init__(self, library):
-        """Luokan konstruktori, joka luo luokan käyttämän pinon. Saa parametrina kirjasto-olion, joka huolehtii operaattoreista.
+        """Luokan konstruktori, joka luo luokan käyttämän pinon. Saa parametrina
+        kirjasto-olion, joka huolehtii operaattoreista.
         """
         self.stack = Stack()
         self.library = library
@@ -17,7 +18,7 @@ class Evaluator():
         self.stack = Stack()
 
         for token in output:
-            if re.findall("^[-+]?\d+(\.\d+)?$", token):
+            if re.findall("^[-+]?[0-9]+([.][0-9]+)*$", token):
                 self.stack.push(float(token))
             elif token in self.library.get_constants():
                 self.stack.push(self.library.get_constant_value(token))

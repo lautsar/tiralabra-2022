@@ -18,7 +18,8 @@ class ShuntingYard():
             lauseke: Muutettava lauseke
 
         Returns:
-            Muutettu lauseke, jos syötteenä ollut lauseke on kelvollinen. False, jos siinä on jokin ongelma.
+            Muutettu lauseke, jos syötteenä ollut lauseke on kelvollinen.
+            False, jos siinä on jokin ongelma.
         """
         self.output = []
         self.operator_stack = Stack()
@@ -42,7 +43,7 @@ class ShuntingYard():
             input: Muutettava lauseke
         """
         for token in expression:
-            if re.findall("^[-+]?\d+(\.\d+)?$", token):
+            if re.findall("^[-+]?[0-9]+([.][0-9]+)*$", token):
                 self.output.append(token)
             elif token in self.library.get_variables():
                 self.output.append(token)
@@ -64,7 +65,7 @@ class ShuntingYard():
 
                 if self.operator_stack.is_empty() is False and self.operator_stack.peek() == '(':
                     self.operator_stack.pop()
-                
+
                 if self.operator_stack.peek() in self.library.get_functions():
                     self.output.append(self.operator_stack.pop())
 
@@ -78,7 +79,8 @@ class ShuntingYard():
     #        print(f"Output: {self.output}, stack {self.operator_stack.get_stack()}")
 
     def handle_operator_token(self, token):
-        """Käsittelee lausekkeesta tulevat operaattorit siten, että ne käsitellään oikeassa järjestyksessä.
+        """Käsittelee lausekkeesta tulevat operaattorit siten, että ne käsitellään oikeassa
+        järjestyksessä.
 
         Args:
             token: Käsiteltävä operaattori
@@ -86,17 +88,16 @@ class ShuntingYard():
         while not self.operator_stack.is_empty():
             if self.operator_stack.peek() not in self.library.get_functions() and self.operator_stack.peek() != '(' and (
                 (self.get_precedence(self.operator_stack.peek())[0] > self.get_precedence(token)[0])
-                or 
-                ((self.get_precedence(self.operator_stack.peek())[0] == self.get_precedence(token)[0]) and 
+                or
+                ((self.get_precedence(self.operator_stack.peek())[0] == self.get_precedence(token)[0]) and
                 (self.get_precedence(self.operator_stack.peek())[1] == "left"))
             ):
-        
+
                 self.output.append(self.operator_stack.pop())
             else:
                 break
 
         self.operator_stack.push(token)
-    
 
     def read_operators(self):
         """Lukee operaattorit operaattoripinosta output-jonoon.
@@ -106,8 +107,8 @@ class ShuntingYard():
             if operator == '(':
                 print('Väärä määrä sulkuja')
                 return False
-            else:
-                self.output.append(operator)
+
+            self.output.append(operator)
 
     def get_precedence(self, operator):
         """Tarkistaa operaattorin laskujärjestyksen.
@@ -116,14 +117,14 @@ class ShuntingYard():
             operator: Operaattori, jonka laskujärjestys tarkistetaan.
 
         Returns:
-            Tuplen, jossa on operaattorin laskujärjestystä kuvaava arvo ja laskujärjestyksen suunta. False, jos operaattoria ei ole olemassa.
+            Tuplen, jossa on operaattorin laskujärjestystä kuvaava arvo ja laskujärjestyksen
+            suunta. False, jos operaattoria ei ole olemassa.
         """
-        if operator == '+' or operator == '-':
+        if operator in ('+', '-'):
             return (2, "left")
-        elif operator == '*' or operator == '/':
+        if operator in ('*', '/'):
             return (3, "left")
-        elif operator == '^':
+        if operator == '^':
             return (4, "right")
-        else:
-            return False
-        
+
+        return False

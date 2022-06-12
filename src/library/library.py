@@ -3,15 +3,16 @@ from library.variables import Variables
 from library.functions import Functions
 
 class Library():
-    """Luokka kokoaa yhteen paikkaan muuttujien, vakioiden ja funktioiden hallinnan. Se luo näitä vastaavat 
-    oliot ja kutsuu niiden avulla varsinaisten olioiden tuottamia palveluita.
+    """Luokka kokoaa yhteen paikkaan muuttujien, vakioiden ja funktioiden
+    hallinnan. Se luo näitä vastaavat oliot ja kutsuu niiden avulla
+    varsinaisten olioiden tuottamia palveluita.
     """
     def __init__(self):
         self.variables = Variables()
         self.constants = Constants()
         self.functions = Functions()
         self.basic_operators = ['+', '-', '/', '*', '^']
-    
+
     def get_variables(self):
         return self.variables.list_used_variables()
 
@@ -38,6 +39,3 @@ class Library():
 
     def add_variable(self, key, value):
         return self.variables.add_variable(key, value)
-
-
-    

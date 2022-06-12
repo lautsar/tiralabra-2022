@@ -1,5 +1,3 @@
-import math
-
 class Functions():
     """Luokka hallitsee käytettävissä olevia funtioita.
     """
@@ -10,12 +8,13 @@ class Functions():
         self.add_functions()
 
     def get_value(self, key):
-        """Palauttaa parametrina saadun funktion tarvitsemien parametrien määrän ja False, jos funktiota ei ole.
+        """Palauttaa parametrina saadun funktion tarvitsemien parametrien määrän
+        ja False, jos funktiota ei ole.
         """
         for function in self.functions:
             if function[0] == key:
                 return function[1]
-        
+
         return False
 
     def list_usable_functions(self):
@@ -25,11 +24,12 @@ class Functions():
 
         for function in self.functions:
             used.append(function[0])
-        
+
         return used
-    
+
     def add_functions(self):
-        """Lisää luokan listaan ne funktiota. Listaan lisätään tuplena funktion nimi ja sen laskentaan tarvittavien parametrien määrä.
+        """Lisää luokan listaan ne funktiota. Listaan lisätään tuplena funktion
+        nimi ja sen laskentaan tarvittavien parametrien määrä.
         """
         self.functions.append(('min', 2))
         self.functions.append(('max', 2))

@@ -15,7 +15,7 @@ class Constants():
         for constant in self.constants:
             if constant[0] == key:
                 return constant[1]
-        
+
         return False
 
     def list_usable_constants(self):
@@ -24,9 +24,9 @@ class Constants():
         used = []
         for constant in self.constants:
             used.append(constant[0])
-        
+
         return used
-    
+
     def add_constants(self):
         """Lisää käytettävissä olevat vakiot listaan vakio-arvo-tuplena.
         """
