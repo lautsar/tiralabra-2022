@@ -43,7 +43,7 @@ class ShuntingYard():
             input: Muutettava lauseke
         """
         for token in expression:
-            if re.findall("^[-+]?[0-9]+([.][0-9]+)*$", token):
+            if re.findall("^[-+]?[0-9]+([.][0-9]+)?$", token):
                 self.output.append(token)
             elif token in self.library.get_variables():
                 self.output.append(token)

@@ -18,7 +18,7 @@ class Evaluator():
         self.stack = Stack()
 
         for token in output:
-            if re.findall("^[-+]?[0-9]+([.][0-9]+)*$", token):
+            if re.findall("^[-+]?[0-9]+([.][0-9]+)?$", token):
                 self.stack.push(float(token))
             elif token in self.library.get_constants():
                 self.stack.push(self.library.get_constant_value(token))

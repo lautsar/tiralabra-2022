@@ -1,6 +1,16 @@
 # Käyttöohje
 
-Ohjelma käynnistetään juurihakemistosta komennolla python3 src/index.py
+
+
+Projektin riippuvuuden asennetaan komennolla
+```
+poetry install
+```
+
+Sovelluksen voi käynnistää juurihakemistosta komennolla
+```
+poetry run python3 src/index.py
+```
 
 Ohjelma kysyy käyttäjältä lauseketta, kunnes annetaan lopetuskomento q.
 
