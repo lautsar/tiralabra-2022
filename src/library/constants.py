@@ -31,3 +31,4 @@ class Constants():
         """Lisää käytettävissä olevat vakiot listaan vakio-arvo-tuplena.
         """
         self.constants.append(('pi', math.pi))
+        self.constants.append(('e', math.e))

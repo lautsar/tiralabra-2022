@@ -33,9 +33,12 @@ class Variables():
     
     def update_value(self, key, value):
         """Päivittää parametrina saadun muuttujan arvon."""
-        for variable in self.variables:
-            if variable[0] == key:
-                variable[1] == value
+        i = 0
+        while i < len(self.variables): 
+            if self.variables[i][0] == key:
+                self.variables[i] = (key, value)
                 return True
+            
+            i += 1
         
         return False
