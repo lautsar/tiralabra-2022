@@ -15,6 +15,9 @@ class Evaluator():
         self.take_one = ['sqrt', 'sin', 'cos', 'tan']
 
     def evaluate(self, output):
+        if len(output) == 0:
+            return False
+
         self.stack = Stack()
 
         for token in output:
@@ -25,41 +28,75 @@ class Evaluator():
             elif token in self.library.get_variables():
                 self.stack.push(self.library.get_variable_value(token))
             elif token in self.take_two:
-                a = self.stack.pop()
-                b = self.stack.pop()
-
-                if token == '+':
-                    self.stack.push(float(a) + float(b))
-                elif token == '-':
-                    self.stack.push(float(b) - float(a))
-                elif token == '/':
-                    self.stack.push(float(b) / float(a))
-                elif token == '*':
-                    self.stack.push(float(a) * float(b))
-                elif token == '^':
-                    self.stack.push(float(b)**float(a))
-                elif token == 'min':
-                    self.stack.push(min(float(a), float(b)))
-                elif token == 'max':
-                    self.stack.push(max(float(a), float(b)))
-                else:
+                if self.take_two_values(token) is False:
                     return False
             elif token in self.take_one:
-                a = self.stack.pop()
-
-                if token == 'sin':
-                    self.stack.push(math.sin(float(a)))
-                elif token == 'cos':
-                    self.stack.push(math.cos(float(a)))
-                elif token == 'tan':
-                    self.stack.push(math.tan(float(a)))
-                elif token == 'sqrt':
-                    if a < 0:
-                        return False
-                    self.stack.push(math.sqrt(float(a)))
+                if self.take_one_value(token) is False:
+                    return False
             else:
                 return False
 
-#            print(self.stack.get_stack())
-
         return self.stack.get_stack()[0]
+
+    def take_two_values(self, token):
+        """ Laskee arvon sellaisille operaatiolle, jotka ottavat kaksi arvoa, ja
+        lisää sen pinoon.
+
+        Args:
+            token: Käsiteltävä operaattori
+
+        Returns:
+            False, jos operaatio on tuntematon tai sitä ei voida laskea.
+            Muuten True,
+        """
+        a = self.stack.pop()
+        b = self.stack.pop()
+
+        if token == '+':
+            self.stack.push(float(a) + float(b))
+        elif token == '-':
+            self.stack.push(float(b) - float(a))
+        elif token == '/':
+            if a == 0:
+                return False
+            self.stack.push(float(b) / float(a))
+        elif token == '*':
+            self.stack.push(float(a) * float(b))
+        elif token == '^':
+            self.stack.push(float(b)**float(a))
+        elif token == 'min':
+            self.stack.push(min(float(a), float(b)))
+        elif token == 'max':
+            self.stack.push(max(float(a), float(b)))
+        else:
+            return False
+
+        return True
+
+    def take_one_value(self, token):
+        """ Laskee arvon sellaisille operaatiolle, jotka ottavat yhden arvon, ja
+        lisää sen pinoon.
+
+        Args:
+            token: Käsiteltävä operaattori
+
+        Returns:
+            False, jos operaatio on tuntematon tai sitä ei voida laskea.
+            Muuten True,
+        """
+        a = self.stack.pop()
+
+        if token == 'sin':
+            self.stack.push(math.sin(float(a)))
+        elif token == 'cos':
+            self.stack.push(math.cos(float(a)))
+        elif token == 'tan':
+            self.stack.push(math.tan(float(a)))
+        elif token == 'sqrt':
+            if a < 0:
+                return False
+            self.stack.push(math.sqrt(float(a)))
+        else:
+            return False
+
+        return True
