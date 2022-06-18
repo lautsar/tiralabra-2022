@@ -14,15 +14,15 @@ def main():
         muu syöte ei tallenna mitään")
 
     while True:
-        lauseke = input("Lauseke: ")
+        expression = input("Lauseke: ")
 
-        if lauseke == 'q':
+        if expression == 'q':
             break
 
-        if lauseke == 'ohje':
+        if expression == 'ohje':
             library.list_all_usable_things()
         else:
-            output = shunting_yard.shunting_yard(lauseke)
+            output = shunting_yard.shunting_yard(expression)
 
             if output is not False:
                 result = evaluator.evaluate(output)
