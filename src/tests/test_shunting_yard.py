@@ -7,11 +7,11 @@ class TestShuntingYard(unittest.TestCase):
         self.shunting_yard = ShuntingYard(Library())
     
     def test_simple_expression(self):
-        expression = '( 2 + 3 )'
+        expression = '(2+3)'
         self.assertEqual(['2', '3', '+'], self.shunting_yard.shunting_yard(expression))
 
     def test_simple_expression_2(self):
-        expression = '( 5 - 2 ) + ( 3 - 1 )'
+        expression = '(5-2) + ( 3 - 1 )'
         self.assertEqual(['5', '2', '-', '3', '1', '-', '+'], self.shunting_yard.shunting_yard(expression))
 
     def test_simple_expression_3(self):

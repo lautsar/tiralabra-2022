@@ -26,6 +26,22 @@ class TestEvaluator(unittest.TestCase):
         output = ['2', '3', '^']
         self.assertEqual(8, self.evaluator.evaluate(output))
 
+    def test_division_with_zero_returns_false(self):
+        output = ['1', '0', '/']
+        self.assertFalse(self.evaluator.evaluate(output))
+
+    def test_simple_square_root(self):
+        output = ['100', 'sqrt']
+        self.assertEqual(10, self.evaluator.evaluate(output))
+
+    def test_square_root_with_negative_value_returns_false(self):
+        output = ['-4', 'sqrt']
+        self.assertFalse(self.evaluator.evaluate(output))
+
     def test_evaluate_returns_false_if_unkown_tokens(self):
         output = ['2', '3', '?']
+        self.assertFalse(self.evaluator.evaluate(output))
+
+    def test_evaluate_returns_false_if_empty_string_is_given(self):
+        output = []
         self.assertFalse(self.evaluator.evaluate(output))
