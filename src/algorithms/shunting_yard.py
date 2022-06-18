@@ -13,6 +13,10 @@ class ShuntingYard():
 
     def shunting_yard(self, expression):
         """Muutaa infix-notaatiossa olevan lausekkeen postfix-muotoon.
+        Kutsuu ensin metodia split_expression, joka pilkkoo käyttäjän syöttämän lausekkeen
+        käsiteltäviin osiin. Tämän tuottama lauseke annetaan metodille read_tokens,
+        joka käsittelee lausekkeen osat shunting yard-algoritmin mukaisesti. Lopuksi
+        metodi read_operators käsittelee jäljelle jäävän operaattorit.
 
         Args:
             lauseke: Muutettava lauseke
@@ -23,7 +27,7 @@ class ShuntingYard():
         """
         self.output = []
         self.operator_stack = Stack()
-        splitted_input = expression.split()
+        splitted_input = self.split_expression(expression)
 
         if self.read_tokens(splitted_input) is False:
             return False
@@ -34,6 +38,48 @@ class ShuntingYard():
         print(f"Muutettu lauseke: {self.output}")
 
         return self.output
+
+    def split_expression(self, expression):
+        """Pilkkoo käyttäjän syöttämän lausekkeen osiin.
+
+        Args:
+            expression: Käyttäjän syöttämä lauseke
+
+        Returns:
+            Lausekkeen osat taulukkona.
+        """
+        splitted_input = []
+        last_char = ''
+        last_type = 0
+        last_token = ''
+
+        for char in expression:
+            if char in ['(', ')', ','] or char in self.library.get_operators() or\
+                re.findall(r'\s', char):
+                if char == '-' and last_char == '(':
+                    last_token = last_token + char
+                    last_type = 1
+
+                if last_type != 0:
+                    splitted_input.append(last_token)
+                    last_token = ''
+                    last_type = 0
+
+                if not re.findall(r"\s", char):
+                    splitted_input.append(char)
+            elif re.findall("[0-9]|[a-z]|.", char):
+                last_token = last_token + char
+                last_type = 1
+            else:
+                return False
+
+            if not re.findall(r"\s", char):
+                last_char = char
+
+        if last_token != '':
+            splitted_input.append(last_token)
+
+        return splitted_input
 
     def read_tokens(self, expression):
         """Lukee algoritmin saaman lausekkeen ja jakaa sen alkiot output-jonoon ja
@@ -86,7 +132,8 @@ class ShuntingYard():
             token: Käsiteltävä operaattori
         """
         while not self.operator_stack.is_empty():
-            if self.operator_stack.peek() not in self.library.get_functions() and self.operator_stack.peek() != '(' and (
+            if self.operator_stack.peek() not in self.library.get_functions() and\
+                self.operator_stack.peek() != '(' and (
                 (self.get_precedence(self.operator_stack.peek())[0] > self.get_precedence(token)[0])
                 or
                 ((self.get_precedence(self.operator_stack.peek())[0] == self.get_precedence(token)[0]) and
