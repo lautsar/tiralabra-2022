@@ -1,8 +1,27 @@
 # Testausdokumentti
 
+Ohjelmaa on testattu unittest-sovelluskehyksen avulla.
+
 ## Yksikkötestauksen kattavuusraportti
-Tilanne 21.5.
+Tilanne 12.6.
 
 ![Testikattavuus](/dokumentaatio/kuvat/testikattavuus.png)
 
-Ohjelmaa on tähän mennessä testattu yksikkötesteillä ja manuaalisesti testaamalla. Testien haaraumakattavuus on tällä hetkellä varsin hyvä, mutta käytetyt testitapaukset ovat vielä varsin yksinkertaisia. Testitapausten laatuun täytyy kiinnittää jatkossa enemmän huomiota.
+Testikattavuusraportin voi muodostaa komennoilla, jolloin raportti muodostuu *htmlcov*-hakemistoon
+```
+coverage run --branch -m pytest src
+coverage html
+```
+
+## 
+
+Testiluokka TestResult testaa lisäksi muiden luokkien yhteistoimintaa.
+
+## Testien toistettavuus
+
+Ohjelman yksikkötestit voidaan suorittaa komennolla
+```
+poetry run pytest src
+```
+
+

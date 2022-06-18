@@ -10,4 +10,5 @@ Pvm | Aika | Mitä tehty
 20.5. | 3 | Stack-luokan toteutus, vähän testejä
 21.5. | 4 | Koodin refaktorointia, lisää testejä. Dokumentaation kirjoittamista
 28.5. | 3 | Operaattoreiden laskujärjestyksen huomiointi
-Yht. | 22 |
+6.-12.6. | 25 | Tarkempi kirjanpito jäi tältä viikolta tekemättä
+Yht. | 47 |
