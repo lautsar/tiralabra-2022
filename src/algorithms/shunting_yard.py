@@ -55,17 +55,17 @@ class ShuntingYard():
 
         for char in expression:
             if char in ['(', ')', ','] or char in self.library.get_operators() or\
-                re.findall(r'\s', char):
+            re.findall(r'\s', char):
                 if char == '-' and last_char == '(':
                     last_token = last_token + char
                     last_type = 1
 
-                if last_type != 0:
+                elif last_type != 0:
                     splitted_input.append(last_token)
                     last_token = ''
                     last_type = 0
 
-                if not re.findall(r"\s", char):
+                if not re.findall(r"\s", char) and last_type == 0:
                     splitted_input.append(char)
             elif re.findall("[0-9]|[a-z]|.", char):
                 last_token = last_token + char

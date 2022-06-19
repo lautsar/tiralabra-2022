@@ -8,9 +8,9 @@ def main():
     shunting_yard = ShuntingYard(library)
     evaluator = Evaluator(library)
 
-    print("Syötä laskettava lauseke siten, että jokainen elementti on erotettu välilyönnillä.")
+    print("Syötä laskettava lauseke. Negatiiviset luvut on ympäröitävä suluilla, jotta lasku menee varmasti oikein.")
     print("'q' lopettaa, 'ohje' antaa listan tuetuista vakioista ja funktioista")
-    print("Lausekkeen syötön jälkeen tuloksen voi tallentaa muuttujaan a-z, \
+    print("Lausekkeen syötön jälkeen tuloksen voi tallentaa muuttujaan a-z,\
         muu syöte ei tallenna mitään")
 
     while True:

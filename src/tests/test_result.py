@@ -44,4 +44,16 @@ class TestResult(unittest.TestCase):
 
         self.assertEqual(0, result)
 
+    def test_simple_expression_with_negative_values(self):
+        expression = '2*4+(-3)'
+        output = self.shunting_yard.shunting_yard(expression)
+        result = self.evaluator.evaluate(output)
 
+        self.assertEqual(5, result)
+
+    def test_simple_expression_with_negative_values2(self):
+        expression = '2.5+4.25+(-3.5)'
+        output = self.shunting_yard.shunting_yard(expression)
+        result = self.evaluator.evaluate(output)
+
+        self.assertEqual(3.25, result)
