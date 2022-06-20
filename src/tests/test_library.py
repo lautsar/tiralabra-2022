@@ -25,7 +25,7 @@ class TestLibrary(unittest.TestCase):
         self.assertEqual(math.pi, self.library.get_constant_value('pi'))
 
     def test_get_functions_returns_functions(self):
-        self.assertEqual(6, len(self.library.get_functions()))
+        self.assertEqual(9, len(self.library.get_functions()))
 
     def test_get_operators_returns_operators(self):
         self.assertEqual(5, len(self.library.get_operators()))

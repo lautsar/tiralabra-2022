@@ -12,7 +12,7 @@ class Evaluator():
         self.stack = Stack()
         self.library = library
         self.take_two = ['+', '-', '/', '*', '^', 'min', 'max']
-        self.take_one = ['sqrt', 'sin', 'cos', 'tan']
+        self.take_one = ['sqrt', 'sin', 'cos', 'tan', 'abs']
 
     def evaluate(self, output):
         if len(output) == 0:
@@ -52,6 +52,9 @@ class Evaluator():
         a = self.stack.pop()
         b = self.stack.pop()
 
+        if a is False or b is False:
+            return False
+
         if token == '+':
             self.stack.push(float(a) + float(b))
         elif token == '-':
@@ -86,12 +89,28 @@ class Evaluator():
         """
         a = self.stack.pop()
 
+        if a is False:
+            return False
+
         if token == 'sin':
             self.stack.push(math.sin(float(a)))
         elif token == 'cos':
             self.stack.push(math.cos(float(a)))
         elif token == 'tan':
             self.stack.push(math.tan(float(a)))
+        elif token == 'abs':
+            if a < 0:
+                self.stack.push(float(-a))
+            else:
+                self.stack.push(float(a))
+        elif token == 'log':
+            if a < 0:
+                return False
+            self.stack.push(math.log10(float(a)))
+        elif token == 'ln':
+            if a < 0:
+                return False
+            self.stack.push(math.log(float(a)))
         elif token == 'sqrt':
             if a < 0:
                 return False

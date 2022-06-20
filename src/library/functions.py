@@ -37,3 +37,7 @@ class Functions():
         self.functions.append(('sin', 1))
         self.functions.append(('cos', 1))
         self.functions.append(('tan', 1))
+        self.functions.append(('abs', 1))
+        self.functions.append(('log', 1))
+        self.functions.append(('ln', 1))
+
