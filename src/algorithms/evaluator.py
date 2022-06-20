@@ -12,7 +12,7 @@ class Evaluator():
         self.stack = Stack()
         self.library = library
         self.take_two = ['+', '-', '/', '*', '^', 'min', 'max']
-        self.take_one = ['sqrt', 'sin', 'cos', 'tan', 'abs']
+        self.take_one = ['sqrt', 'sin', 'cos', 'tan', 'abs', 'log', 'ln']
 
     def evaluate(self, output):
         if len(output) == 0:
