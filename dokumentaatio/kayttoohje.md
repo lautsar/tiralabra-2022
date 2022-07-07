@@ -12,8 +12,13 @@ Sovelluksen voi käynnistää juurihakemistosta komennolla
 poetry run python3 src/index.py
 ```
 
-Ohjelma kysyy käyttäjältä lauseketta, kunnes annetaan lopetuskomento q.
+Ohjelman käynnistyksen jälkeen ohjelma kysyy käyttäjältä lauseketta, kunnes käyttäjä syöttää lopetuskomennon 'lopeta'.
 
-Ohjelmalle annetaan syötteenä matemaattinen lauseke, jonka arvon ohjelma laskee. Tällä hetkellä annettu syöte käsitellään vain splittaamalla se välilyöntien kohdalta. Näin ollen laskettavan lausekkeen kaikki osat on tällä hetkellä annettava välilyönneillä erotettuna, esim. ( 2 + 3 ) * 5 tai 1 + sin ( -1 ).
+Ohjelma tuntee kolme komentoa:
+* ohje: Tulostaa käytettävissä olevat muuttujat ja funktiot.
+* tallenna: Tallentaa viimeisenä annetun lausekkeen arvon muuttujaan (a-z). Muuttuja kysytään käyttäjältä.
+* lopeta: Lopettaa ohjelman suorittamisen.
 
-Kun annetun lausekkeen arvo on laskettu, sen voi tallentaa muuttujaan antamalla kysyttäessä muuttujaksi yksi merkki väliltä a-z. Muussa tapauksessa tulosta ei tallenneta. Jos arvo tallennetaan muuttujaan, sitä voidaan käyttää seuraavissa lausekkeissa.
+Kaikki muut syötteet tulkitaan matemaattiseksi lausekkeeksi, jonka arvoa yritetään laskea. Lauseke voi sisältää numeroita, kaarisulkuja ja erikseen määritettyjä funktioita, muuttujia ja matemaattisia vakioita. Jos lauseke sisältää muita merkkejä, lauseke tulkitaan virheelliseksi ja käyttäjälle annetaan virheilmoitus. Ohjelma tunnistaa matemaattiset funktiot min, max, sqrt, sin, cos, tan, abs, log, ln sekä vakiot pi ja e. Lisäksi voidaan käyttää muuttujia a-z, jos käyttäjä on tallentanut niihin tietoa.
+
+Jos annettu lauseke sisältää vain sallittuja merkkejä, yritetään laskea sen arvo. Jos lauseke on virheellinen, eli sisältää esimerkiksi väärän määrän sulkuja tai kaksi operaattoria peräkkäin, käyttäjälle annetaan virheilmoitus. Jos lauseke on kelvollinen, käyttäjälle palautetaan sen arvo.
