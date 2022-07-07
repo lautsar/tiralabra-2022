@@ -1,14 +1,13 @@
 # Tuntikirjanpito
 
-Pvm | Aika | Mitä tehty
+Vko | Aika | Mitä tehty
 --- | --- | ---
-9.5. | 3 | Aloitusluento, kurssimateriaaliin tutustuminen
-11.5. | 2 | Aiheiden vertailua ja eri algoritmeihin tutustumista
-12.5. | 2 | Aiheiden vertailua ja eri algoritmeihin tutustumista, aiheen valinta
-14.5. | 2 | Projektin alustus ja muut käytännön asiat. Alustava määrittelydokumentti
-15.5. | 3 | Shunting yard -algoritmiin tutustumista ja hyvin alkeellinen ensimmäinen versio
-20.5. | 3 | Stack-luokan toteutus, vähän testejä
-21.5. | 4 | Koodin refaktorointia, lisää testejä. Dokumentaation kirjoittamista
-28.5. | 3 | Operaattoreiden laskujärjestyksen huomiointi
-6.-12.6. | 25 | Tarkempi kirjanpito jäi tältä viikolta tekemättä
-Yht. | 47 |
+1 (19) | 9 | Aloitusluento, valmistautumista, aiheen valinta. Projektin alustus ja muut käytännön asiat.
+2 (20) | 10 | Ensimmäinen versio algoritmeista ja tietorakenteesta. Testauksen aloitus.
+3 (21 ) | 3 | Laskujärjestyksen korjaus, peruslaskutoimitukset ok
+4 (22) | 0 |
+5 (23) | 25 | Shunting yard valmis. Funktioiden, vakioiden ja muuttujien hyödyntäminen.
+6 (24) | 20 | Refaktorointia ja muuta korjailua. Testaamista.
+Viimeistely | 20 | Demo ja siihen valmistautuminen. Testikattavuuden lisääminen ja bugien korjausta. Dokumentaation päivitys.
+Yht. 87
+
